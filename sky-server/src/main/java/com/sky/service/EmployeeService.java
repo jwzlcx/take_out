@@ -31,5 +31,14 @@ public interface EmployeeService {
 
     public void save(EmployeeDTO employeeDTO);
 
+    //
     PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO);//参数有问题
+    /**
+     * 停用启用员工账号
+     */
+    void startOrStop(Integer status, Long id);
+    //根据id查询员工
+    Employee getById(Long id);
+
+    void update(EmployeeDTO employeeDTO);
 }
