@@ -25,19 +25,21 @@ public class AutoFillAspect {
     public void autoFillPointcut() {}
 
     //前置通知
-    @Before("autoFillPointCut()")
+    @Before("autoFillPointcut()")
     public void autoFill(JoinPoint joinPoint) {
         log.info("开始进行公共字段填充");
         //被拦截的方法的数据操作类型
         MethodSignature signature =(MethodSignature)joinPoint.getSignature();
         AutoFill autoFill=signature.getMethod().getAnnotation(AutoFill.class);
         OperationType operationType=autoFill.value();
+
         Object[] args = joinPoint.getArgs();
-        LocalDateTime now = LocalDateTime.now();
+
         if(args==null || args.length==0){
             return;
         }
         Object entity=args[0];
+        LocalDateTime now = LocalDateTime.now();
         Long currentId= BaseContext.getCurrentId();
         if(operationType==OperationType.INSERT){
             try {
@@ -50,8 +52,7 @@ public class AutoFillAspect {
                 setCreateUser.invoke(entity,currentId);
                 setUpdateTime.invoke(entity,now);
                 setUpdateUser.invoke(entity,currentId);
-            }catch (Exception e)
-            {
+            }catch (Exception e) {
                 e.printStackTrace();
             }
         }else if (operationType==OperationType.UPDATE){

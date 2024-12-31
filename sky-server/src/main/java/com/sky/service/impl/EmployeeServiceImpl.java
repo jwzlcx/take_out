@@ -40,7 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        // TODO 后期需要改为当前登录的用户id
 //        employee.setCreateUser(BaseContext.getCurrentId());
 //        employee.setUpdateUser(BaseContext.getCurrentId());
-//        employeeMapper.insert(employee); // 调用 Mapper 的 insert 方法
+        employeeMapper.insert(employee); // 调用 Mapper 的 insert 方法
     }
     /**
      * 员工登录
