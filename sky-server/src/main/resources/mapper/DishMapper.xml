@@ -6,6 +6,7 @@
         insert into dish(name,category_id,price,image,description,create_time,update_time,create_user,update_user,status)
             values(#{name},#{category_id},#{price},#{image},#{description},#{create_time},#{update_time},#{create_user},#{update_user},#{status})
     </insert>
+
     <select id="pageQuery" resultType="com.sky.vo.DishVO">
         select d.*,c.name as categoryName  from dish d left outer join category c on d.category_id = c.id
         <where>
@@ -21,5 +22,19 @@
         </where>
         order by c.create_time desc
     </select>
+    <update id="update">
+        update dish
+        <set>
+            <if test="name!=null">name = #{name},</if>
+            <if test="categoryId!=null">category_id = #{categoryId},</if>
+            <if test="price!=null">price = #{price},</if>
+            <if test="image!=null">image = #{image},</if>
+            <if test="description!=null">description = #{description},</if>
+            <if test="status!=null">status = #{status},</if>
+            <if test="updateTime!=null">update_time = #{updateTime},</if>
+            <if test="updateUser!=null">update_User = #{updateUser},</if>
+        </set>
+        where id=#{id}
+    </update>
    
 </mapper>
