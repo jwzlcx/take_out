@@ -25,4 +25,8 @@ public interface DishMapper {
     //菜品分页查询
 
     Page<DishVO> pageQuery(DishPageQueryDTO dishPageQueryDTO);
+
+    //查询菜品
+    @Select("select *from dish where id=#{id}")
+    Dish getById(Long id);
 }
